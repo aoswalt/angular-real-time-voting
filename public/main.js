@@ -12,7 +12,13 @@ angular.module("app", ["angular.filter"])
     const main = this;
 
     const db = firebase.database();
+    const dbref = db.ref("votes");
 
+    main.heading = "Voterific";
+    main.votes = {};
+
+    main.addNominee = () => dbref.update({ [dbref.push().key]: {name:main.nominee, count:0} })
+      .then($timeout().then(() => main.nominee = null));
     main.castVote = key => db.ref(`votes/${key}/count`).transaction(val => ++val);
 
     main.heading = "Voterific";
