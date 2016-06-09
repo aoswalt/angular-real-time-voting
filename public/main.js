@@ -13,8 +13,8 @@ angular.module("app", [])
 
     const db = firebase.database();
 
-    main.red = () => db.ref("votes/red").set(main.votes.red + 1);
-    main.blue = () => db.ref("votes/blue").set(main.votes.blue + 1);
+    main.red = () => db.ref("votes/red").set(++main.votes.red);
+    main.blue = () => db.ref("votes/blue").set(++main.votes.blue);
 
     main.heading = "Voterific";
     db.ref("votes").on("value", snapshot =>
