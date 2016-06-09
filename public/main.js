@@ -12,5 +12,10 @@ angular.module("app", [])
     const main = this;
 
     main.heading = "Voterific";
-    firebase.database().ref("/").once("value", snapshot => $timeout(main.heading = snapshot.val()));
+    firebase.database().ref("votes").on("value", snapshot =>
+      $timeout(() => snapshot.val())
+        .then(data => {
+          main.redCount = data.red;
+          main.blueCount = data.blue;
+        }));
   });
