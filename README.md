@@ -1,1 +1,0 @@
-# angular-real-time-voting
