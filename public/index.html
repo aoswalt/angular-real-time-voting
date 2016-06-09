@@ -11,10 +11,10 @@
     <div ng-controller="MainCtrl as main">
       <h1>{{main.heading}}</h1>
       <div>
-        <button ng-click="main.red()">Red</button>{{main.redCount}}
+        <button ng-click="main.red()">Red</button>{{main.votes.red}}
       </div>
       <div>
-        <button ng-click="main.blue()">Blue</button>{{main.blueCount}}
+        <button ng-click="main.blue()">Blue</button>{{main.votes.blue}}
       </div>
     </div>
   </div>

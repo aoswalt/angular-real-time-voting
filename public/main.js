@@ -11,11 +11,13 @@ angular.module("app", [])
   .controller("MainCtrl", function($timeout) {
     const main = this;
 
+    const db = firebase.database();
+
+    main.red = () => db.ref("votes/red").set(main.votes.red + 1);
+    main.blue = () => db.ref("votes/blue").set(main.votes.blue + 1);
+
     main.heading = "Voterific";
-    firebase.database().ref("votes").on("value", snapshot =>
+    db.ref("votes").on("value", snapshot =>
       $timeout(() => snapshot.val())
-        .then(data => {
-          main.redCount = data.red;
-          main.blueCount = data.blue;
-        }));
+        .then(data => main.votes = data));
   });
