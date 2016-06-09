@@ -1,0 +1,22 @@
+{
+  "name": "voting",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aoswalt/angular-real-time-voting.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aoswalt/angular-real-time-voting/issues"
+  },
+  "homepage": "https://github.com/aoswalt/angular-real-time-voting#readme",
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
+}
