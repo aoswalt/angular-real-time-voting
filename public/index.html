@@ -10,6 +10,12 @@
   <div ng-app="app">
     <div ng-controller="MainCtrl as main">
       <h1>{{main.heading}}</h1>
+
+      <form ng-submit="main.addNominee()">
+        <input type="text" ng-model="main.nominee" id="nominee" placeholder="Nominee">
+        <button type="submit">Nominate</button>
+      </form>
+
       <div ng-repeat="nom in main.votes | toArray:true | orderBy:'count':true">
         <button ng-click="main.castVote(nom.$key)">{{nom.name}}</button>{{nom.count}}
       </div>
