@@ -21,8 +21,13 @@ angular.module("app", ["angular.filter"])
       .then($timeout().then(() => main.nominee = null));
     main.castVote = key => db.ref(`votes/${key}/count`).transaction(val => ++val);
 
-    db.ref("votes").on("child_added", snapshot =>
-      $timeout().then(() => main.votes[snapshot.getKey()] = snapshot.val()));
-    db.ref("votes").on("child_changed", snapshot =>
-      $timeout().then(() => main.votes[snapshot.getKey()] = snapshot.val()));
+    const updateEntry = snapshot => $timeout()
+      .then(main.votes[snapshot.getKey()] = snapshot.val())
+      .then(() => Object.keys(main.votes)
+        .map(key => main.votes[key])
+        .sort((a,b) => b.count - a.count))
+      .then(sorted => main.leaderStyle = {color: sorted[0].name});
+
+    db.ref("votes").on("child_added", snapshot => updateEntry(snapshot));
+    db.ref("votes").on("child_changed", snapshot => updateEntry(snapshot));
   });
