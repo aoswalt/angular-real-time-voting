@@ -1,4 +1,4 @@
-angular.module("app", [])
+angular.module("app", ["angular.filter"])
   .config(() => {
     firebase.initializeApp({
       apiKey: "AIzaSyAT2D9QJIiPHzlORB8fGEoRQQAPoeazwn4",
@@ -13,8 +13,7 @@ angular.module("app", [])
 
     const db = firebase.database();
 
-    main.voteRed = () => db.ref("votes/red").set(++main.votes.red);
-    main.voteBlue = () => db.ref("votes/blue").set(++main.votes.blue);
+    main.castVote = key => db.ref(`votes/${key}/count`).transaction(val => ++val);
 
     main.heading = "Voterific";
     db.ref("votes").on("value", snapshot =>

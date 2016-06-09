@@ -10,17 +10,15 @@
   <div ng-app="app">
     <div ng-controller="MainCtrl as main">
       <h1>{{main.heading}}</h1>
-      <div>
-        <button ng-click="main.voteRed()">Red</button>{{main.votes.red}}
-      </div>
-      <div>
-        <button ng-click="main.voteBlue()">Blue</button>{{main.votes.blue}}
+      <div ng-repeat="nom in main.votes | toArray:true | orderBy:'count':true">
+        <button ng-click="main.castVote(nom.$key)">{{nom.name}}</button>{{nom.count}}
       </div>
     </div>
   </div>
 
   <script src="lib/firebase/firebase.js" type="text/javascript"></script>
   <script src="lib/angular/angular.min.js" type="text/javascript"></script>
+  <script src="lib/angular-filter/dist/angular-filter.min.js" type="text/javascript"></script>
   <script src="main.js" type="text/javascript"></script>
 </body>
 </html>
